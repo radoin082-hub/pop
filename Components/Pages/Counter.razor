@@ -1,0 +1,33 @@
+﻿@page "/counter"
+@rendermode InteractiveServer
+@using pop.Components.Layout
+@inject IJSRuntime JS // t3 javascript 
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter with Popup and SweetAlert2</h1>
+
+
+<button @onclick="show" class="btn btn-secondary">Show Popup</button>
+<POP IsVisible="ispop" OnClose="hide" />
+
+
+<button @onclick="t3js" class="btn btn-primary">Click here imen</button>
+
+@code {
+    private bool ispop = false;
+
+    private void show() => ispop = true;
+    private void hide() => ispop = false;
+
+    
+    private async Task t3js()
+    {
+        await JS.InvokeVoidAsync("Swal.fire", new
+        {
+            title = "IMS",
+            text = "IMS.",
+            icon = "success",
+            confirmButtonText = "OK"
+        });
+    }
+}
